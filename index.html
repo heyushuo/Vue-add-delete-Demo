@@ -36,12 +36,12 @@
 	               <td>{{item.username}}</td>
 	               <td>{{item.age}}</td>
 	                <td>
-                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" @click="del(index)" >删除</button>
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" @click="deleteMsg(index)" >删除</button>
                 </td>
 	            </tr>
 	            <tr v-show="myData.length!=0">
 	                <td colspan="4" class="text-right">
-	                    <button class="btn btn-danger btn-sm" @click="deleteAll()" data-toggle="modal" data-target="#layer" >删除全部</button>
+	                    <button class="btn btn-danger btn-sm" @click="deleteMsg(-2)" data-toggle="modal" data-target="#layer" >删除全部</button>
 	                </td>
 	            </tr>
 	            <tr v-show="myData.length==0">
@@ -59,7 +59,8 @@
 		data:{
 			username:'',
 			age:'',
-			myData:[]
+			myData:[],
+			nowIndex:''
 			
 		},
 		methods:{
@@ -81,7 +82,15 @@
 			},
 			del(n){
 				console.log(n)
-				this.myData.splice(n,1);
+				
+			},
+			deleteMsg(n){
+				this.nowIndex=n;
+				if(n!=-2){
+					this.myData.splice(n,1);
+				}else{
+					this.myData=[];
+				}
 			}
 		}
 	})
